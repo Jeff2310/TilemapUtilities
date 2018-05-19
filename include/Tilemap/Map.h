@@ -5,7 +5,7 @@
 #ifndef TILEGENERATOR_MAP_H
 #define TILEGENERATOR_MAP_H
 
-#include "TileMap/Tile.h"
+#include "Tile.h"
 
 
 typedef int Coordinate;
@@ -39,6 +39,11 @@ public:
         if(*x >= width) *x=width-1;
         if(*y < 0) *y=0;
         if(*y >= height) *y=height-1;
+    }
+
+    inline bool in_bound(Coordinate x, Coordinate y) const {
+        if (x < 0 || x >= width || y < 0 || y >= height) return false;
+        return true;
     }
     void dump() const;
 };

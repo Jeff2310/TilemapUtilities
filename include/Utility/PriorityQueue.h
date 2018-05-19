@@ -12,6 +12,10 @@
 using std::vector;
 using std::less;
 
+/*
+ * STL中的实现方法。看不懂的地方换成自己的了....
+ */
+
 template<typename T, typename Sequence = vector<T>,
         typename Compare = less<T> >
 class PriorityQueue {
@@ -102,6 +106,7 @@ public:
     iterator begin(){
         return data.begin();
     }
+
     iterator end(){
         return data.begin()+size;
     }

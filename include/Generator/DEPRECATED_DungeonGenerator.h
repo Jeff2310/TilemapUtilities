@@ -10,7 +10,13 @@
 
 using std::vector;
 
-class DungeonGenerator : MapGenerator{
+/*
+ * (DEPRECATED)
+ * 用生成树的方法生成地牢。生成树为最小生成树的时候效果可以，走廊之间不会交叉。
+ * 但是如果生成树是普通生成树，那么不能保证在走廊不交叉的情况下，各个房间都联通。
+ * 因为上述缘故生成的地牢走廊很短，所以不用这种方法了。
+ */
+class DEPRECATED_DungeonGenerator : MapGenerator {
 public:
     typedef unsigned int Size;
     enum PathType{
@@ -47,9 +53,13 @@ public:
             corridorWidth = 1;
         }
     };
-    DungeonGenerator() = default;
-    DungeonGenerator(Coordinate height, Coordinate width, Variables variables = DungeonGenerator::Variables());
-    ~DungeonGenerator() override;
+
+    DEPRECATED_DungeonGenerator() = default;
+
+    DEPRECATED_DungeonGenerator(Coordinate height, Coordinate width,
+                                Variables variables = DEPRECATED_DungeonGenerator::Variables());
+
+    ~DEPRECATED_DungeonGenerator() override;
     void generateMap(Map *map) override;
 private:
     void spawnRoom();
@@ -60,7 +70,6 @@ private:
     vector<Room> rooms;
     std::uniform_int_distribution<Coordinate> random_x, random_y;
     std::uniform_int_distribution<Size> random_size;
-    Noise noise;
 #define rand_x (random_x(random_engine))
 #define rand_y (random_y(random_engine))
 #define rand_size (random_size(random_engine))

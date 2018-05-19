@@ -17,7 +17,8 @@ enum TileType{
     FLOOR,
     WALL,
     PATH,
-    QUEUED
+    QUEUED,
+    CORRIDOR
 };
 
 class Tile {

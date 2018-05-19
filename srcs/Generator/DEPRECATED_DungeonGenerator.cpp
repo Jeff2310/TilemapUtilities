@@ -2,7 +2,7 @@
 // Created by jeff2310 on 5/17/18.
 //
 
-#include "DungeonGenerator.h"
+#include "Generator/DEPRECATED_DungeonGenerator.h"
 #include <queue>
 #include <algorithm>
 #include <iostream>
@@ -11,16 +11,16 @@ using std::sort;
 using std::less;
 using std::queue;
 
-DungeonGenerator::DungeonGenerator(Coordinate height, Coordinate width, Variables variables)
+DEPRECATED_DungeonGenerator::DEPRECATED_DungeonGenerator(Coordinate height, Coordinate width, Variables variables)
         : MapGenerator(height, width), _currentVariable(variables), random_x(0, width-1),
-        random_y(0, height-1), random_size(variables.roomSize_min, variables.roomSize_max), noise(1){
+          random_y(0, height - 1), random_size(variables.roomSize_min, variables.roomSize_max) {
 }
 
-DungeonGenerator::~DungeonGenerator(){
+DEPRECATED_DungeonGenerator::~DEPRECATED_DungeonGenerator() {
 
 }
 
-void DungeonGenerator::spawnRoom() {
+void DEPRECATED_DungeonGenerator::spawnRoom() {
     Coordinate room_x = rand_x, room_y = rand_y;
     Size room_width = rand_size, room_height = rand_size;
     Coordinate width = map->getWidth(), height = map->getHeight();
@@ -239,7 +239,7 @@ void carveCorridorYY(Map *map, Coordinate x1, Coordinate y1, Coordinate x2, Coor
     }
 }
 
-bool DungeonGenerator::__carveCorridor(Coordinate x1, Coordinate y1, Coordinate x2, Coordinate y2){
+bool DEPRECATED_DungeonGenerator::__carveCorridor(Coordinate x1, Coordinate y1, Coordinate x2, Coordinate y2) {
     bool canCarveXY=false, canCarveYX=false;
     bool canCarveXX=false, canCarveYY=false;
     if(testCorridorXY(map, x1, y1, x2, y2)){
@@ -256,7 +256,7 @@ bool DungeonGenerator::__carveCorridor(Coordinate x1, Coordinate y1, Coordinate 
     }
 
     if(canCarveXY&&canCarveYX){
-        float rand = noise.noiseValue(0.0f, 0.0f);
+        float rand = random();
         if(rand > 0.5f){
             carveCorridorXY(map, x1, y1, x2, y2);
         }else{
@@ -268,7 +268,7 @@ bool DungeonGenerator::__carveCorridor(Coordinate x1, Coordinate y1, Coordinate 
         carveCorridorYX(map, x1, y1, x2, y2);
     }else{
         if(canCarveXX&&canCarveYY){
-            float rand = noise.noiseValue(0.0f, 0.0f);
+            float rand = random();
             if(rand > 0.5f){
                 carveCorridorXX(map, x1, y1, x2, y2);
             }else{
@@ -285,7 +285,7 @@ bool DungeonGenerator::__carveCorridor(Coordinate x1, Coordinate y1, Coordinate 
     return true;
 }
 
-bool DungeonGenerator::carveCorridor(const Path &path) {
+bool DEPRECATED_DungeonGenerator::carveCorridor(const Path &path) {
     int from_region = path.from, to_region = path.to;
     Room &from = rooms[from_region], &to = rooms[to_region];
 
@@ -310,7 +310,7 @@ void joinUnion(int *parent, int x, int y){
     if(fx!=fy) parent[fx]=fy;
 }
 
-void DungeonGenerator::connectRooms() {
+void DEPRECATED_DungeonGenerator::connectRooms() {
     vector<Path> paths;
     int remain_regions = (int)rooms.size();
     int *parent = new int[remain_regions];
@@ -352,7 +352,7 @@ void DungeonGenerator::connectRooms() {
     delete parent;
 }
 
-void DungeonGenerator::generateMap(Map *map) {
+void DEPRECATED_DungeonGenerator::generateMap(Map *map) {
     random_fill(0.0f);
     Coordinate height = map->getHeight(), width = map->getWidth();
     auto bool_buffer = new bool[height * width];

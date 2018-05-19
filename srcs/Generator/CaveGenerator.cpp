@@ -2,8 +2,8 @@
 // Created by jeff2310 on 5/10/18.
 //
 
-#include "CaveGenerator.h"
-#include "../Noise/Noise.h"
+#include "Generator/CaveGenerator.h"
+#include "Noise/Noise.h"
 
 
 #include <queue>

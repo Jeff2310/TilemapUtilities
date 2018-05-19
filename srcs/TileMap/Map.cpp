@@ -2,7 +2,7 @@
 // Created by jeff2310 on 5/8/18.
 //
 
-#include "Map.h"
+#include "Tilemap/Map.h"
 #include <fstream>
 #include <FreeImage.h>
 
@@ -38,6 +38,10 @@ Map& Map::operator=(const Map &m) {
 }
 
 Tile& Map::tile(Coordinate x, Coordinate y) const{
+    if (x < 0) x = 0;
+    if (x > width) x = width;
+    if (y < 0) y = 0;
+    if (y > height) y = height;
     return tiles[y*width + x];
 }
 

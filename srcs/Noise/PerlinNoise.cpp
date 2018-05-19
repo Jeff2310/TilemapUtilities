@@ -2,7 +2,8 @@
 // Created by jeff2310 on 5/8/18.
 //
 
-#include "PerlinNoise.h"
+#include "Noise/PerlinNoise.h"
+#include <math.h>
 #include <random>
 
 //const float eps = 0.000001f;
@@ -39,7 +40,7 @@ void PerlinNoise::initRandomLists(){
 
 float PerlinNoise::noiseValue(float x, float y){
     NoiseCoordinate x1, y1, x2, y2;
-    x1 = (NoiseCoordinate)floorf(x), y1 = (NoiseCoordinate)floorf(y);
+    x1 = (NoiseCoordinate) floor(x), y1 = (NoiseCoordinate) floor(y);
     x2 = x1+1, y2 = y1+1;
     // 到所在方格四个端点的向量
     Vector dir11{x-(float)x1, y-(float)y1};

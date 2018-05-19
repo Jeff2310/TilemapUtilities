@@ -2,7 +2,7 @@
 // Created by jeff2310 on 5/10/18.
 //
 
-#include "Noise.h"
+#include "Noise/Noise.h"
 
 Noise::Noise(unsigned int size) : size(size), random_device(), random_engine(random_device()),
                                   randomFloat(-1.0f, 1.0f) {
@@ -23,5 +23,6 @@ float Noise::rand(){
 }
 
 float Noise::noiseValue(float x, float y) {
+    // 就是普通的白噪音 只不过相同坐标噪声值相同
     return noises[((int)y*size+(int)x)%size];
 }

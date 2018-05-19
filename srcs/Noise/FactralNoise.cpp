@@ -2,11 +2,12 @@
 // Created by jeff2310 on 5/10/18.
 //
 
-#include "FactralNoise.h"
-#include "PerlinNoise.h"
+#include "Noise/FactralNoise.h"
+#include "Noise/PerlinNoise.h"
 #include <FreeImage.h>
 #include <string>
 #include <sstream>
+#include <math.h>
 
 void generateTexture512(){
     Noise noise(512);
@@ -53,8 +54,7 @@ void generateTexture512(){
                 noise1 = (noise01 + (noise11-noise01) * x_blend);
 
                 sampleNoise = (noise0 + (noise1-noise0) * y_blend);
-                color = (unsigned char)floorf(sampleNoise * 255);
-
+                color = (unsigned char) floor(sampleNoise * 255);
                 bits[FI_RGBA_RED] = bits[FI_RGBA_BLUE] = bits[FI_RGBA_GREEN] = color;
                 bits += bytespp;
 
@@ -74,7 +74,8 @@ void generateTexture512(){
     for(int y=0; y<height; y++){
         bits = FreeImage_GetScanLine(bitmap, y);
         for(int x=0; x<width; x++){
-            bits[FI_RGBA_RED] = bits[FI_RGBA_BLUE] = bits[FI_RGBA_GREEN] = (unsigned char)floorf(fractalNoise[x][y] * 255);;
+            bits[FI_RGBA_RED] = bits[FI_RGBA_BLUE] = bits[FI_RGBA_GREEN] = (unsigned char) floor(
+                    fractalNoise[x][y] * 255);;
             bits+=bytespp;
         }
     }
